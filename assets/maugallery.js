@@ -161,6 +161,7 @@
     nextImage() {
       let activeImage = null;
       $("img.gallery-item").each(function() {
+        console.log(this, $(this).attr("src"), $(".lightboxImage").attr("src"))
         if ($(this).attr("src") === $(".lightboxImage").attr("src")) {
           activeImage = $(this);
         }
@@ -189,11 +190,11 @@
 
       $(imagesCollection).each(function(i) {
         if ($(activeImage).attr("src") === $(this).attr("src")) {
-          index = i;
+          index = i+1;
+          next = imagesCollection[index] || imagesCollection[0];
+          $(".lightboxImage").attr("src", $(next).attr("src"));
         }
       });
-      next = imagesCollection[index] || imagesCollection[0];
-      $(".lightboxImage").attr("src", $(next).attr("src"));
     },
     createLightBox(gallery, lightboxId, navigation) {
       gallery.append(`<div class="modal fade" id="${
